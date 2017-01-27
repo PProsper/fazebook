@@ -27,6 +27,12 @@ router.post('/', function(req, res, next) {
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  models.User.findById(req.params.id).then(function(user) {
+    res.render('users/show', { user: user });
+  });
+});
+
 router.delete('/:id', function(req, res, next) {
   models.User.destroy({
     where: { id: req.params.id }
@@ -34,5 +40,6 @@ router.delete('/:id', function(req, res, next) {
     res.redirect('/users');
   });
 });
+
 
 module.exports = router;
